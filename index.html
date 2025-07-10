@@ -45,26 +45,27 @@
         
         .floating-btn-1 {
             animation: float 25s ease-in-out infinite;
-            transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), background 0.3s cubic-bezier(0.4,0,0.2,1), filter 0.3s cubic-bezier(0.4,0,0.2,1);
+            transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), background 0.3s cubic-bezier(0.4,0,0.2,1), filter 0.3s cubic-bezier(0.4,0,0.2,1) !important;
         }
         .floating-btn-1:hover {
-            transform: scale(1.15);
-            background: linear-gradient(135deg, #8b8ffa, #c4a9fa);
-            filter: brightness(1.2) drop-shadow(0 0 20px rgba(139, 143, 250, 0.6));
+            transform: scale(1.15) !important;
+            background: linear-gradient(135deg, #8b8ffa, #c4a9fa) !important;
+            filter: brightness(1.2) drop-shadow(0 0 20px rgba(139, 143, 250, 0.6)) !important;
         }
         .floating-btn-2 {
             animation: float2 30s ease-in-out infinite;
-            transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), background 0.3s cubic-bezier(0.4,0,0.2,1), filter 0.3s cubic-bezier(0.4,0,0.2,1);
+            transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), background 0.3s cubic-bezier(0.4,0,0.2,1), filter 0.3s cubic-bezier(0.4,0,0.2,1) !important;
         }
         .floating-btn-2:hover {
-            transform: scale(1.15);
-            background: linear-gradient(135deg, #ff8fbe, #ffa5b3);
-            filter: brightness(1.2) drop-shadow(0 0 20px rgba(255, 143, 190, 0.6));
+            transform: scale(1.15) !important;
+            background: linear-gradient(135deg, #ff8fbe, #ffa5b3) !important;
+            filter: brightness(1.2) drop-shadow(0 0 20px rgba(255, 143, 190, 0.6)) !important;
         }
         
         .water-effect {
             position: relative;
             overflow: hidden;
+            pointer-events: auto;
         }
         
         .water-effect::before {
@@ -78,6 +79,7 @@
             transform: rotate(0deg);
             animation: waterRipple 15s infinite linear;
             z-index: 1;
+            pointer-events: none;
         }
         
         @keyframes waterRipple {
@@ -160,7 +162,7 @@
             <a href="https://youtu.be/fjSzj6LPu9k?list=PLc9zi1alEIAh_CGM4xTtOTnpTviMVc2in" 
                target="_blank" 
                rel="noopener noreferrer"
-               class="absolute floating-btn-1 water-effect rounded-full shadow-xl hover:shadow-2xl transition-all duration-300"
+               class="absolute floating-btn-1 water-effect rounded-full shadow-xl"
                style="top: 35%; left: 30%; width: 120px; height: 120px; background: linear-gradient(135deg, #6366f1, #8b5cf6);">
                 <div class="btn-content w-full h-full flex flex-col items-center justify-center text-white">
                     <i class="fas fa-play text-3xl mb-2"></i>
@@ -171,7 +173,7 @@
             <a href="https://youtu.be/-vTFZowVnXk?list=PLc9zi1alEIAh_CGM4xTtOTnpTviMVc2in" 
                target="_blank" 
                rel="noopener noreferrer"
-               class="absolute floating-btn-2 water-effect rounded-full shadow-xl hover:shadow-2xl transition-all duration-300"
+               class="absolute floating-btn-2 water-effect rounded-full shadow-xl"
                style="top: 60%; left: 60%; width: 140px; height: 140px; background: linear-gradient(135deg, #ec4899, #f43f5e);">
                 <div class="btn-content w-full h-full flex flex-col items-center justify-center text-white">
                     <i class="fas fa-play-circle text-4xl mb-2"></i>
