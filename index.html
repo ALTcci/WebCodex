@@ -45,10 +45,19 @@
         
         .floating-btn-1 {
             animation: float 25s ease-in-out infinite;
+            transition: transform 0.25s cubic-bezier(0.4,0,0.2,1), background 0.25s cubic-bezier(0.4,0,0.2,1);
         }
-        
+        .floating-btn-1:hover {
+            transform: scale(1.12);
+            background: linear-gradient(135deg, #7c82fa, #b39dfa);
+        }
         .floating-btn-2 {
             animation: float2 30s ease-in-out infinite;
+            transition: transform 0.25s cubic-bezier(0.4,0,0.2,1), background 0.25s cubic-bezier(0.4,0,0.2,1);
+        }
+        .floating-btn-2:hover {
+            transform: scale(1.12);
+            background: linear-gradient(135deg, #ff6fae, #ff8fa3);
         }
         
         .water-effect {
