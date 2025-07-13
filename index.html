@@ -98,6 +98,11 @@ Cosmic Navigation
 Explore the universe with a single touch
 </p>
 </div>
+
+<!-- Music Control Button -->
+<button id="music-control" class="absolute top-4 right-4 w-12 h-12 bg-purple-600 hover:bg-purple-700 rounded-full flex items-center justify-center text-white shadow-lg transition-all duration-300 hover:scale-110 z-20">
+<i id="music-icon" class="fas fa-pause text-lg"></i>
+</button>
 <script>
 // Create stars
 function createStars() {
@@ -148,6 +153,25 @@ bgMusic.volume = 0.5; // adjust as needed
 // Optionally set rain overlay volume lower
 const rainOverlay = document.getElementById("rain-overlay");
 rainOverlay.volume = 0.3; // adjust as needed
+
+// Music control functionality
+const musicControl = document.getElementById("music-control");
+const musicIcon = document.getElementById("music-icon");
+let isPlaying = true;
+
+musicControl.addEventListener("click", function() {
+    if (isPlaying) {
+        bgMusic.pause();
+        rainOverlay.pause();
+        musicIcon.className = "fas fa-play text-lg";
+        isPlaying = false;
+    } else {
+        bgMusic.play();
+        rainOverlay.play();
+        musicIcon.className = "fas fa-pause text-lg";
+        isPlaying = true;
+    }
+});
 </script>
 </body>
 </html>
