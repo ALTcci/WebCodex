@@ -199,12 +199,12 @@ musicControl.addEventListener("click", function() {
     if (!isStarted) return; // Don't allow mute toggle before audio starts
     isMuted = !isMuted;
     if (isMuted) {
-        fadeOut(bgMusic, 800);
-        fadeOut(rainOverlay, 800);
+        fadeOut(bgMusic, 2400);
+        fadeOut(rainOverlay, 2400);
         musicIcon.className = "fas fa-volume-mute text-lg";
     } else {
-        fadeIn(bgMusic, 0.5, 800);
-        fadeIn(rainOverlay, 0.2, 800);
+        fadeIn(bgMusic, 0.5, 2400);
+        fadeIn(rainOverlay, 0.2, 2400);
         musicIcon.className = "fas fa-volume-up text-lg";
     }
 });
@@ -214,8 +214,8 @@ function startAudioOnMouseMove() {
     if (!isStarted) {
         bgMusic.play();
         rainOverlay.play();
-        fadeIn(bgMusic, 0.5, 1200); // fade in to 50% volume
-        fadeIn(rainOverlay, 0.2, 1200); // fade in to 20% volume
+        fadeIn(bgMusic, 0.5, 3600); // fade in to 50% volume (3x longer)
+        fadeIn(rainOverlay, 0.2, 3600); // fade in to 20% volume (3x longer)
         isStarted = true;
     }
     window.removeEventListener('mousemove', startAudioOnMouseMove);
