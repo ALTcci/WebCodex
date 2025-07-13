@@ -157,53 +157,31 @@ rainOverlay.volume = 0.2; // 50% volume
 // Music control functionality
 const musicControl = document.getElementById("music-control");
 const musicIcon = document.getElementById("music-icon");
-let isPlaying = true;
-
-// Ensure music starts playing immediately
-bgMusic.play().catch(e => console.log("Autoplay prevented"));
-rainOverlay.play().catch(e => console.log("Autoplay prevented"));
-
-// Fallback: play audio on first user interaction if autoplay was blocked
-function resumeAudioOnUserGesture() {
-    if (bgMusic.paused) bgMusic.play();
-    if (rainOverlay.paused) {
-        rainOverlay.volume = 0; // Start silent for fade-in
-        rainOverlay.play();
-        fadeInRain();
-    }
-    window.removeEventListener('click', resumeAudioOnUserGesture);
-    window.removeEventListener('keydown', resumeAudioOnUserGesture);
-    window.removeEventListener('mousemove', resumeAudioOnUserGesture);
-}
-window.addEventListener('click', resumeAudioOnUserGesture);
-window.addEventListener('keydown', resumeAudioOnUserGesture);
-window.addEventListener('mousemove', resumeAudioOnUserGesture);
-
-// Fade in transition for rain overlay
-function fadeInRain() {
-    let targetVolume = 0.2; // or your preferred volume
-    let step = 0.02;
-    let interval = setInterval(() => {
-        if (rainOverlay.volume < targetVolume) {
-            rainOverlay.volume = Math.min(targetVolume, rainOverlay.volume + step);
-        } else {
-            rainOverlay.volume = targetVolume;
-            clearInterval(interval);
-        }
-    }, 100);
-}
+// Always start muted and paused
+let isStarted = false;
+let isMuted = true;
+bgMusic.muted = true;
+rainOverlay.muted = true;
+bgMusic.pause();
+rainOverlay.pause();
+musicIcon.className = "fas fa-play text-lg";
 
 musicControl.addEventListener("click", function() {
-    if (isPlaying) {
-        bgMusic.pause();
-        rainOverlay.pause();
-        musicIcon.className = "fas fa-play text-lg";
-        isPlaying = false;
-    } else {
+    if (!isStarted) {
+        // First click: start playing, unmute, show unmuted icon
+        bgMusic.muted = false;
+        rainOverlay.muted = false;
         bgMusic.play();
         rainOverlay.play();
-        musicIcon.className = "fas fa-pause text-lg";
-        isPlaying = true;
+        musicIcon.className = "fas fa-volume-up text-lg";
+        isStarted = true;
+        isMuted = false;
+    } else {
+        // Toggle mute/unmute
+        isMuted = !isMuted;
+        bgMusic.muted = isMuted;
+        rainOverlay.muted = isMuted;
+        musicIcon.className = isMuted ? "fas fa-volume-mute text-lg" : "fas fa-volume-up text-lg";
     }
 });
 </script>
