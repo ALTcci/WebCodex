@@ -63,6 +63,9 @@ animation: twinkle var(--duration) infinite ease-in-out;
 0% {
 transform: translateY(-100vh) translateX(50px) rotate(10deg);
 }
+50% {
+transform: translateY(0vh) translateX(25px) rotate(10deg);
+}
 100% {
 transform: translateY(100vh) translateX(-50px) rotate(10deg);
 }
@@ -70,7 +73,7 @@ transform: translateY(100vh) translateX(-50px) rotate(10deg);
 
 .raindrop {
 position: absolute;
-width: 2px;
+width: 1.7px;
 height: 40px;
 background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
 border-radius: 50%;
