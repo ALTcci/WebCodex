@@ -58,6 +58,25 @@ animation: twinkle var(--duration) infinite ease-in-out;
 0%, 100% { opacity: 0.2; }
 50% { opacity: 1; }
 }
+
+@keyframes rain {
+0% {
+transform: translateY(-100vh) translateX(0);
+}
+100% {
+transform: translateY(100vh) translateX(20px);
+}
+}
+
+.raindrop {
+position: absolute;
+width: 1px;
+height: 20px;
+background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+border-radius: 50%;
+animation: rain 3s linear infinite;
+transform: rotate(10deg);
+}
 </style>
 </head>
 <body class="relative flex items-center justify-center min-h-screen p-4">
@@ -66,6 +85,8 @@ animation: twinkle var(--duration) infinite ease-in-out;
 <audio id="rain-overlay" src="BG Music/rain.mp3" autoplay loop></audio>
 <!-- Background stars -->
 <div id="stars-container"></div>
+<!-- Rain effect -->
+<div id="rain-container"></div>
 <!-- Cosmic buttons container -->
 <div class="relative z-10 flex flex-wrap justify-center gap-8 max-w-4xl mx-auto">
 <!-- Home Button -->
@@ -125,6 +146,29 @@ container.appendChild(star);
 }
 // Add slight delay to star creation for better performance
 setTimeout(createStars, 100);
+
+// Create rain effect
+function createRain() {
+const container = document.getElementById('rain-container');
+const raindropCount = 50; // Very subtle amount
+
+for (let i = 0; i < raindropCount; i++) {
+const raindrop = document.createElement('div');
+raindrop.classList.add('raindrop');
+
+// Random position across the screen
+raindrop.style.left = `${Math.random() * 100}%`;
+raindrop.style.top = `${Math.random() * 100}%`;
+
+// Random animation delay for natural effect
+raindrop.style.animationDelay = `${Math.random() * 3}s`;
+
+container.appendChild(raindrop);
+}
+}
+
+// Add slight delay to rain creation for better performance
+setTimeout(createRain, 200);
 // Add interactive effect when clicking buttons
 document.querySelectorAll('.cosmic-button').forEach(button => {
 button.addEventListener('click', function(e) {
