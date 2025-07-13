@@ -159,6 +159,10 @@ const musicControl = document.getElementById("music-control");
 const musicIcon = document.getElementById("music-icon");
 let isPlaying = true;
 
+// Ensure music starts playing immediately
+bgMusic.play().catch(e => console.log("Autoplay prevented"));
+rainOverlay.play().catch(e => console.log("Autoplay prevented"));
+
 musicControl.addEventListener("click", function() {
     if (isPlaying) {
         bgMusic.pause();
