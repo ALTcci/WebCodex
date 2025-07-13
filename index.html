@@ -263,17 +263,14 @@ musicControl.addEventListener("click", function() {
         fadeOut(bgMusic, 1200);
         fadeOut(rainOverlay, 1200);
         musicIcon.className = "fas fa-volume-mute text-lg transition-colors duration-300 pop-animate";
-        musicIcon.style.color = '#ef4444'; // red for muted
+        musicIcon.style.color = '#7c3aed'; // always purple
     } else {
         fadeIn(bgMusic, 0.5, 1200);
         fadeIn(rainOverlay, 0.2, 1200);
         musicIcon.className = "fas fa-volume-up text-lg transition-colors duration-300 pop-animate";
-        musicIcon.style.color = '#22c55e'; // green for unmuted
+        musicIcon.style.color = '#7c3aed'; // always purple
     }
-    // After animation, return to base color if unmuted
-    setTimeout(() => {
-      if (!isMuted) musicIcon.style.color = '#7c3aed'; // purple
-    }, 350);
+    // No need to reset color, always purple
 });
 
 // Play audio on first mouse movement
