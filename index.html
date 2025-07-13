@@ -101,7 +101,7 @@ Explore the universe with a single touch
 
 <!-- Music Control Button -->
 <button id="music-control" class="absolute top-4 right-4 w-12 h-12 bg-purple-600 hover:bg-purple-700 rounded-full flex items-center justify-center text-white shadow-lg transition-all duration-300 hover:scale-110 z-20">
-<i id="music-icon" class="fas fa-pause text-lg"></i>
+<i id="music-icon" class="fas fa-volume-up text-lg"></i>
 </button>
 <script>
 // Create stars
@@ -157,33 +157,33 @@ rainOverlay.volume = 0.2; // 50% volume
 // Music control functionality
 const musicControl = document.getElementById("music-control");
 const musicIcon = document.getElementById("music-icon");
-// Always start muted and paused
+
 let isStarted = false;
-let isMuted = true;
-bgMusic.muted = true;
-rainOverlay.muted = true;
+let isMuted = false;
+bgMusic.muted = false;
+rainOverlay.muted = false;
 bgMusic.pause();
 rainOverlay.pause();
-musicIcon.className = "fas fa-play text-lg";
+musicIcon.className = "fas fa-volume-up text-lg";
 
 musicControl.addEventListener("click", function() {
+    if (!isStarted) return; // Don't allow mute toggle before audio starts
+    isMuted = !isMuted;
+    bgMusic.muted = isMuted;
+    rainOverlay.muted = isMuted;
+    musicIcon.className = isMuted ? "fas fa-volume-mute text-lg" : "fas fa-volume-up text-lg";
+});
+
+// Play audio on first mouse movement
+function startAudioOnMouseMove() {
     if (!isStarted) {
-        // First click: start playing, unmute, show unmuted icon
-        bgMusic.muted = false;
-        rainOverlay.muted = false;
         bgMusic.play();
         rainOverlay.play();
-        musicIcon.className = "fas fa-volume-up text-lg";
         isStarted = true;
-        isMuted = false;
-    } else {
-        // Toggle mute/unmute
-        isMuted = !isMuted;
-        bgMusic.muted = isMuted;
-        rainOverlay.muted = isMuted;
-        musicIcon.className = isMuted ? "fas fa-volume-mute text-lg" : "fas fa-volume-up text-lg";
     }
-});
+    window.removeEventListener('mousemove', startAudioOnMouseMove);
+}
+window.addEventListener('mousemove', startAudioOnMouseMove);
 </script>
 </body>
 </html>
