@@ -132,8 +132,8 @@ Explore the wonders with a single touch
 </div>
 
 <!-- Music Control Button -->
-<button id="music-control" class="absolute top-4 right-4 flex items-center justify-center z-20 group" style="background: none; box-shadow: none; border: none;">
-  <i id="music-icon" class="fas fa-volume-up text-2xl transition-transform duration-500 ease-in-out group-hover:scale-110" style="color: rgba(229,231,235,0.32);"></i>
+<button id="music-control" class="absolute top-10 right-10 flex items-center justify-center z-20 group" style="background: none; box-shadow: none; border: none;">
+  <i id="music-icon" class="fas fa-volume-up text-2xl transition-transform duration-500 ease-in-out group-hover:scale-110" style="color: rgba(229,231,235,0.22);"></i>
 </button>
 <script>
 // Create stars
@@ -221,7 +221,7 @@ bgMusic.pause();
 rainOverlay.pause();
 // On startup, set base color for icon
 musicIcon.className = "fas fa-volume-up text-2xl transition-transform duration-500 ease-in-out group-hover:scale-110";
-musicIcon.style.color = 'rgba(229,231,235,0.32)'; // even lighter gray, lower opacity
+musicIcon.style.color = 'rgba(229,231,235,0.22)'; // even lighter gray, lower opacity
 
 // Helper functions for fade in/out
 function fadeIn(audio, targetVolume = 0.2, duration = 1000) {
@@ -264,7 +264,7 @@ musicControl.addEventListener("click", function() {
         fadeIn(bgMusic, 0.5, 1200);
         fadeIn(rainOverlay, 0.2, 1200);
         musicIcon.className = "fas fa-volume-up text-2xl transition-transform duration-500 ease-in-out group-hover:scale-110";
-        musicIcon.style.color = 'rgba(229,231,235,0.32)'; // even lighter gray, lower opacity when unmuted
+        musicIcon.style.color = 'rgba(229,231,235,0.22)'; // even lighter gray, lower opacity when unmuted
     }
 });
 
