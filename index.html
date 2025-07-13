@@ -163,6 +163,16 @@ let isPlaying = true;
 bgMusic.play().catch(e => console.log("Autoplay prevented"));
 rainOverlay.play().catch(e => console.log("Autoplay prevented"));
 
+// Fallback: play audio on first user interaction if autoplay was blocked
+function resumeAudioOnUserGesture() {
+    if (bgMusic.paused) bgMusic.play();
+    if (rainOverlay.paused) rainOverlay.play();
+    window.removeEventListener('click', resumeAudioOnUserGesture);
+    window.removeEventListener('keydown', resumeAudioOnUserGesture);
+}
+window.addEventListener('click', resumeAudioOnUserGesture);
+window.addEventListener('keydown', resumeAudioOnUserGesture);
+
 musicControl.addEventListener("click", function() {
     if (isPlaying) {
         bgMusic.pause();
