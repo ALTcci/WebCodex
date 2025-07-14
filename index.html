@@ -174,25 +174,14 @@ raindrop.style.top = '-20px'; // Start above the viewport
 // Random animation delay for natural effect
 raindrop.style.animationDelay = `${Math.random() * 0.8}s`;
 
+// When animation ends, respawn at a new random position and delay
+raindrop.addEventListener('animationiteration', function() {
+  this.style.left = `${Math.random() * 100}%`;
+  this.style.animationDelay = `${Math.random() * 0.8}s`;
+});
+
 container.appendChild(raindrop);
 }
-
-// Periodically remove a random raindrop and add a new one at a random position
-setInterval(() => {
-  const raindrops = container.querySelectorAll('.raindrop');
-  if (raindrops.length > 0) {
-    const idx = Math.floor(Math.random() * raindrops.length);
-    const oldDrop = raindrops[idx];
-    if (oldDrop) oldDrop.remove();
-    // Add a new raindrop
-    const newDrop = document.createElement('div');
-    newDrop.classList.add('raindrop');
-    newDrop.style.left = `${Math.random() * 100}%`;
-    newDrop.style.top = '-20px';
-    newDrop.style.animationDelay = `${Math.random() * 0.8}s`;
-    container.appendChild(newDrop);
-  }
-}, 100);
 }
 
 // Add slight delay to rain creation for better performance
