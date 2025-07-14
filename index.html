@@ -73,10 +73,10 @@ transform: translateY(100vh) translateX(-130px) rotate(10deg);
 
 .raindrop {
 position: absolute;
-width: 1px;
-height: 10px;
+width: 100px;
+height: 25px;
 background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
-border-radius: 50%;
+border-radius: 30%;
 animation: rain 0.8s linear infinite;
 }
 /* Pop animation for mute/unmute icon */
@@ -88,6 +88,15 @@ animation: rain 0.8s linear infinite;
 .pop-animate {
   animation: pop 0.3s cubic-bezier(0.4,0,0.2,1);
 }
+
+/* Prevent all scrolling and overflow on all platforms */
+html, body {
+  overflow: hidden !important;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+}
+
 </style>
 </head>
 <body class="relative flex items-center justify-center min-h-screen p-4">
@@ -279,8 +288,8 @@ musicControl.addEventListener("click", function() {
     }
 });
 
-// Play audio on first mouse movement
-function startAudioOnMouseMove() {
+// Play audio on first user interaction (more robust)
+function startAudioOnUserAction() {
     if (!isStarted) {
         bgMusic.play();
         rainOverlay.play();
@@ -288,9 +297,15 @@ function startAudioOnMouseMove() {
         fadeIn(rainOverlay, 0.2, 2400); // fade in to 20% volume (2x original)
         isStarted = true;
     }
-    window.removeEventListener('mousemove', startAudioOnMouseMove);
+    window.removeEventListener('mousemove', startAudioOnUserAction);
+    window.removeEventListener('mousedown', startAudioOnUserAction);
+    window.removeEventListener('keydown', startAudioOnUserAction);
+    window.removeEventListener('touchstart', startAudioOnUserAction);
 }
-window.addEventListener('mousemove', startAudioOnMouseMove);
+window.addEventListener('mousemove', startAudioOnUserAction);
+window.addEventListener('mousedown', startAudioOnUserAction);
+window.addEventListener('keydown', startAudioOnUserAction);
+window.addEventListener('touchstart', startAudioOnUserAction);
 </script>
 </body>
 </html>
