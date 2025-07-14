@@ -172,7 +172,8 @@ raindrop.style.left = `${Math.random() * 100}%`;
 raindrop.style.top = '-20px'; // Start above the viewport
 
 // Random animation delay for natural effect
-raindrop.style.animationDelay = `${Math.random() * 0.8}s`;
+// Use a random negative animationDelay so raindrops start at different points in their fall
+raindrop.style.animationDelay = `${-Math.random() * 0.8}s`;
 
 // When animation ends, respawn at a new random position and delay
 raindrop.addEventListener('animationiteration', function() {
