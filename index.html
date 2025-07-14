@@ -286,8 +286,8 @@ musicControl.addEventListener("click", function() {
     }
 });
 
-// Play audio on first mouse movement
-function startAudioOnMouseMove() {
+// Play audio on first user interaction (more robust)
+function startAudioOnUserAction() {
     if (!isStarted) {
         bgMusic.play();
         rainOverlay.play();
@@ -295,9 +295,15 @@ function startAudioOnMouseMove() {
         fadeIn(rainOverlay, 0.2, 2400); // fade in to 20% volume (2x original)
         isStarted = true;
     }
-    window.removeEventListener('mousemove', startAudioOnMouseMove);
+    window.removeEventListener('mousemove', startAudioOnUserAction);
+    window.removeEventListener('mousedown', startAudioOnUserAction);
+    window.removeEventListener('keydown', startAudioOnUserAction);
+    window.removeEventListener('touchstart', startAudioOnUserAction);
 }
-window.addEventListener('mousemove', startAudioOnMouseMove);
+window.addEventListener('mousemove', startAudioOnUserAction);
+window.addEventListener('mousedown', startAudioOnUserAction);
+window.addEventListener('keydown', startAudioOnUserAction);
+window.addEventListener('touchstart', startAudioOnUserAction);
 </script>
 </body>
 </html>
