@@ -73,7 +73,7 @@ transform: translateY(100vh) translateX(-130px) rotate(10deg);
 
 .raindrop {
 position: absolute;
-width: 1px;
+width: 10px;
 height: 25px;
 background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
 border-radius: 50%;
@@ -169,7 +169,6 @@ setTimeout(createStars, 100);
 function createRain() {
 const container = document.getElementById('rain-container');
 const raindropCount = 100; // More raindrops to compensate for faster speed
-const animDuration = 0.8; // seconds, matches your CSS
 
 for (let i = 0; i < raindropCount; i++) {
 const raindrop = document.createElement('div');
@@ -179,9 +178,8 @@ raindrop.classList.add('raindrop');
 raindrop.style.left = `${Math.random() * 100}%`;
 raindrop.style.top = '-20px'; // Start above the viewport
 
-// Random negative animation delay for natural effect
-const randomDelay = Math.random() * animDuration;
-raindrop.style.animationDelay = `-${randomDelay}s`;
+// Random animation delay for natural effect
+raindrop.style.animationDelay = `${Math.random() * 0.8}s`;
 // Hide raindrop initially if at the very top
 raindrop.style.opacity = '0';
 setTimeout(() => { raindrop.style.opacity = '1'; }, 10);
@@ -189,8 +187,7 @@ setTimeout(() => { raindrop.style.opacity = '1'; }, 10);
 // When animation ends, respawn at a new random position and delay
 raindrop.addEventListener('animationiteration', function() {
   this.style.left = `${Math.random() * 100}%`;
-  const newDelay = Math.random() * animDuration;
-  this.style.animationDelay = `-${newDelay}s`;
+  this.style.animationDelay = `${Math.random() * 0.8}s`;
   this.style.opacity = '0';
   setTimeout(() => { this.style.opacity = '1'; }, 10);
 });
