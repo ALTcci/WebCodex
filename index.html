@@ -73,10 +73,10 @@ transform: translateY(100vh) translateX(-130px) rotate(10deg);
 
 .raindrop {
 position: absolute;
-width: 10px;
+width: 100px;
 height: 25px;
 background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
-border-radius: 50%;
+border-radius: 30%;
 animation: rain 0.8s linear infinite;
 }
 /* Pop animation for mute/unmute icon */
@@ -88,6 +88,7 @@ animation: rain 0.8s linear infinite;
 .pop-animate {
   animation: pop 0.3s cubic-bezier(0.4,0,0.2,1);
 }
+
 /* Prevent all scrolling and overflow on all platforms */
 html, body {
   overflow: hidden !important;
@@ -95,6 +96,7 @@ html, body {
   width: 100%;
   position: fixed;
 }
+
 </style>
 </head>
 <body class="relative flex items-center justify-center min-h-screen p-4">
