@@ -1,10 +1,10 @@
 #!/bin/bash
 
-echo "----- Adding all changes -----"
+echo "---------- Adding all changes ----------"
 git add .
 
-echo "----- Committing -----"
+echo "---------- Committing ----------"
 git commit -m "push"
 
-echo "----- Pushing to remote -----"
+echo "---------- Pushing to remote ----------"
 git push 
