@@ -88,6 +88,13 @@ animation: rain 0.8s linear infinite;
 .pop-animate {
   animation: pop 0.3s cubic-bezier(0.4,0,0.2,1);
 }
+/* Prevent all scrolling and overflow on all platforms */
+html, body {
+  overflow: hidden !important;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+}
 </style>
 </head>
 <body class="relative flex items-center justify-center min-h-screen p-4">
