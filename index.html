@@ -172,13 +172,17 @@ raindrop.style.left = `${Math.random() * 100}%`;
 raindrop.style.top = '-20px'; // Start above the viewport
 
 // Random animation delay for natural effect
-// Use a random negative animationDelay so raindrops start at different points in their fall
-raindrop.style.animationDelay = `${-Math.random() * 0.8}s`;
+raindrop.style.animationDelay = `${Math.random() * 0.8}s`;
+// Hide raindrop initially if at the very top
+raindrop.style.opacity = '0';
+setTimeout(() => { raindrop.style.opacity = '1'; }, 10);
 
 // When animation ends, respawn at a new random position and delay
 raindrop.addEventListener('animationiteration', function() {
   this.style.left = `${Math.random() * 100}%`;
   this.style.animationDelay = `${Math.random() * 0.8}s`;
+  this.style.opacity = '0';
+  setTimeout(() => { this.style.opacity = '1'; }, 10);
 });
 
 container.appendChild(raindrop);
