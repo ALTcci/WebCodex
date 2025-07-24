@@ -107,6 +107,14 @@ html, body {
 <div id="stars-container"></div>
 <!-- Rain effect -->
 <div id="rain-container"></div>
+<!-- Center Start Button -->
+<div class="relative z-10 flex justify-center mb-8">
+  <button id="start-button" class="cosmic-button w-32 h-32 md:w-40 md:h-40 rounded-full flex flex-col items-center justify-center text-white text-3xl md:text-4xl" title="Start Music">
+    <i class="fas fa-play"></i>
+    <span class="text-sm md:text-base mt-2">Start</span>
+  </button>
+</div>
+
 <!-- Cosmic buttons container -->
 <div class="relative z-10 flex flex-wrap justify-center gap-8 max-w-4xl mx-auto">
 <!-- Luminal Button -->
@@ -237,6 +245,7 @@ rainOverlay.volume = 0.2; // 50% volume
 // Music control functionality
 const musicControl = document.getElementById("music-control");
 const musicIcon = document.getElementById("music-icon");
+const startButton = document.getElementById("start-button");
 
 let isStarted = false;
 let isMuted = false;
@@ -244,9 +253,10 @@ bgMusic.muted = false;
 rainOverlay.muted = false;
 bgMusic.pause();
 rainOverlay.pause();
-// On startup, set base color for icon
+
+// On startup, set volume icon to unmuted state
 musicIcon.className = "fas fa-volume-up text-2xl transition-transform duration-500 ease-in-out group-hover:scale-110";
-musicIcon.style.color = 'rgba(229,231,235,0.22)'; // even lighter gray, lower opacity
+musicIcon.style.color = 'rgba(229,231,235,0.22)';
 
 // Helper functions for fade in/out
 function fadeIn(audio, targetVolume = 0.2, duration = 1000) {
@@ -277,6 +287,44 @@ function fadeOut(audio, duration = 1000) {
     }, 50);
 }
 
+// Start button functionality
+startButton.addEventListener("click", function() {
+    if (!isStarted) {
+        bgMusic.play();
+        rainOverlay.play();
+        fadeIn(bgMusic, 0.5, 2400);
+        fadeIn(rainOverlay, 0.2, 2400);
+        isStarted = true;
+        
+        // Change button to show it's active
+        const playIcon = this.querySelector('i');
+        const textSpan = this.querySelector('span');
+        playIcon.className = 'fas fa-pause';
+        textSpan.textContent = 'Pause';
+        this.title = 'Pause Music';
+    } else {
+        // Pause/Resume functionality
+        if (bgMusic.paused) {
+            bgMusic.play();
+            rainOverlay.play();
+            const playIcon = this.querySelector('i');
+            const textSpan = this.querySelector('span');
+            playIcon.className = 'fas fa-pause';
+            textSpan.textContent = 'Pause';
+            this.title = 'Pause Music';
+        } else {
+            bgMusic.pause();
+            rainOverlay.pause();
+            const playIcon = this.querySelector('i');
+            const textSpan = this.querySelector('span');
+            playIcon.className = 'fas fa-play';
+            textSpan.textContent = 'Resume';
+            this.title = 'Resume Music';
+        }
+    }
+});
+
+// Music control functionality (volume mute/unmute)
 musicControl.addEventListener("click", function() {
     if (!isStarted) return; // Don't allow mute toggle before audio starts
     isMuted = !isMuted;
@@ -284,33 +332,14 @@ musicControl.addEventListener("click", function() {
         fadeOut(bgMusic, 1200);
         fadeOut(rainOverlay, 1200);
         musicIcon.className = "fas fa-volume-mute text-2xl transition-transform duration-500 ease-in-out group-hover:scale-110";
-        musicIcon.style.color = 'rgba(156,163,175,0.22)'; // even darker gray, even lower opacity when muted
+        musicIcon.style.color = 'rgba(156,163,175,0.22)';
     } else {
         fadeIn(bgMusic, 0.5, 1200);
         fadeIn(rainOverlay, 0.2, 1200);
         musicIcon.className = "fas fa-volume-up text-2xl transition-transform duration-500 ease-in-out group-hover:scale-110";
-        musicIcon.style.color = 'rgba(229,231,235,0.22)'; // even lighter gray, lower opacity when unmuted
+        musicIcon.style.color = 'rgba(229,231,235,0.22)';
     }
 });
-
-// Play audio on first user interaction (more robust)
-function startAudioOnUserAction() {
-    if (!isStarted) {
-        bgMusic.play();
-        rainOverlay.play();
-        fadeIn(bgMusic, 0.5, 2400); // fade in to 50% volume (2x original)
-        fadeIn(rainOverlay, 0.2, 2400); // fade in to 20% volume (2x original)
-        isStarted = true;
-    }
-    window.removeEventListener('mousemove', startAudioOnUserAction);
-    window.removeEventListener('mousedown', startAudioOnUserAction);
-    window.removeEventListener('keydown', startAudioOnUserAction);
-    window.removeEventListener('touchstart', startAudioOnUserAction);
-}
-window.addEventListener('mousemove', startAudioOnUserAction);
-window.addEventListener('mousedown', startAudioOnUserAction);
-window.addEventListener('keydown', startAudioOnUserAction);
-window.addEventListener('touchstart', startAudioOnUserAction);
 </script>
 </body>
 </html>
